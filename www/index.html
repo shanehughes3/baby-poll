@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<style>
+		.queued {
+			display: none;
+		}
+		.live {
+			display: block;
+		}
+		.shown {
+			display: none;
+		}
+		</style>
+		<script>
+		window.onload = function() {
+			document.getElementById("container").onsubmit = function() {
+				return false;
+			}
+			setup();
+		}
+
+		function setup() {
+			['landing-next-button', 'q1-next-button'].forEach(function(id) {
+				document.getElementById(id).onclick = next;
+			});
+		}
+		
+		function next(e) {
+			switch (e.target.id) {
+				case 'landing-next-button':
+					document.getElementById('landing').classList.add('shown');
+					document.getElementById('q1').classList.add('live');
+					break;
+				case "q1-next-button":
+					document.getElementById('q1').classList.add('shown');
+					document.getElementById("q2").classList.add("live");
+				default:
+					console.log(e.target.id);
+			}
+		}
+		</script>
+	</head>
+	<body>
+		<form id="container">
+			<div id="landing" class="display">
+				<h1>Ellen and Shane are having another baby!</h1>
+				<p>We'd like to take a survey to see what people think. Can you answer four quick questions?</p>
+				<button type=button id="landing-next-button">Start</button>
+			</div>
+			<div id="q1" class="queued">
+				<h1>What do you think the sex of the baby will be?</h1>
+				<input type="radio" name="sex" value="male" id="sex-male-radio">
+				<label for="sex-male-radio">Boy</label>
+				<input type="radio" name="sex" value="male">
+				<label for="sex-male-radio">Girl</label>
+				<button type=button id="q1-next-button">Next</button>
+			</div>
+			<div id="q2" class="queued">
+				<h1>When do you think the baby will be born?</h1>
+			</div>
+			<div id="q3" class="queued">
+				<h1>How much do you think the baby will weigh?</h1>
+			</div>
+			<div id="q4" class="queued">
+				<h1>How long do you think the baby will be?</h1>
+				<p></p>
+			</div>
+			<div id="end" class="queued">
+				<h1>Great! Just one more thing...</h1>
+				<p>Tell us a bit about yourself and we can send you the results!</p>
+				<input type="text" name="name" placeholder="name"></input>
+				<input type="text" name="email" placeholder="email"></input>
+				<button formaction="javascript:null">Submit</button>
+			</div>
+		</form>
+	</body>
+</html>
