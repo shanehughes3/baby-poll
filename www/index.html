@@ -1,14 +1,51 @@
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<style>
+		body {
+			position: relative;
+			width: 100vw;
+			height: 100%;
+			overflow: hidden;
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		#container {
+			overflow: hidden;
+			position: absolute;
+			width: 70vw;
+			max-width: 700px;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			margin: 0;
+		}
 		.queued {
-			display: none;
+			position: absolute;
+			opacity: 0;
+			transform: translate(100%, 0);
+			pointer-events: none;
 		}
 		.live {
-			display: block;
+			width: 100%;
+			top: 0;
+			text-align: center;
+			position: absolute;
+			opacity: 1;
+			transform: translate(0, 0);
+			transition: transform 0.8s ease-out, opacity 0.4s ease-out 0.4s;
+			pointer-events: auto;
 		}
 		.shown {
-			display: none;
+			position: absolute;
+			opacity: 0;
+			transform: translate(-100%, 0);
+			transition: transform 0.8s ease-in, opacity 0.4s ease-in;
+			pointer-events: none;
+		}
+		#landing {
+			position: relative;
 		}
 		</style>
 		<script>
@@ -20,23 +57,43 @@
 		}
 
 		function setup() {
-			['landing-next-button', 'q1-next-button'].forEach(function(id) {
-				document.getElementById(id).onclick = next;
-			});
+			var buttons = document.querySelectorAll('button');
+			for (var i = 0; i < buttons.length; ++i) {
+				buttons[i].onclick = next;
+			}
+			document.querySelector('#landing').classList.add('live');
 		}
 		
 		function next(e) {
 			switch (e.target.id) {
 				case 'landing-next-button':
-					document.getElementById('landing').classList.add('shown');
-					document.getElementById('q1').classList.add('live');
+					moveFromAndTo('landing', 'q1');
 					break;
-				case "q1-next-button":
-					document.getElementById('q1').classList.add('shown');
-					document.getElementById("q2").classList.add("live");
+				case 'q1-next-button':
+					moveFromAndTo('q1', 'q2');
+					break;
+				case 'q2-next-button':
+					moveFromAndTo('q2', 'q3');
+					break;
+				case 'q3-next-button':
+					moveFromAndTo('q3', 'q4');
+					break;
+				case 'q4-next-button':
+					moveFromAndTo('q4', 'end');
+					break;
+				case 'submit':
+					submit();
+					break;
 				default:
 					console.log(e.target.id);
 			}
+		}
+		function moveFromAndTo(a, b) {
+			document.getElementById(a).classList.add('shown');
+			document.getElementById(b).classList.add('live');
+		}
+		function submit() {
+			console.log('Submit called');
 		}
 		</script>
 	</head>
@@ -49,6 +106,7 @@
 			</div>
 			<div id="q1" class="queued">
 				<h1>What do you think the sex of the baby will be?</h1>
+				<p>Our first was a boy: Francis</p>
 				<input type="radio" name="sex" value="male" id="sex-male-radio">
 				<label for="sex-male-radio">Boy</label>
 				<input type="radio" name="sex" value="male">
@@ -57,20 +115,25 @@
 			</div>
 			<div id="q2" class="queued">
 				<h1>When do you think the baby will be born?</h1>
+				<p>Francis was induced 5 days after his due date</p>
+				<button type=button id="q2-next-button">Next</button>
 			</div>
 			<div id="q3" class="queued">
 				<h1>How much do you think the baby will weigh?</h1>
+				<p>Francis weighed 8 lbs. 13 oz.</p>
+				<button type=button id="q3-next-button">Next</button>
 			</div>
 			<div id="q4" class="queued">
 				<h1>How long do you think the baby will be?</h1>
 				<p></p>
+				<button type=button id="q4-next-button">Next</button>
 			</div>
 			<div id="end" class="queued">
 				<h1>Great! Just one more thing...</h1>
 				<p>Tell us a bit about yourself and we can send you the results!</p>
 				<input type="text" name="name" placeholder="name"></input>
 				<input type="text" name="email" placeholder="email"></input>
-				<button formaction="javascript:null">Submit</button>
+				<button formaction="javascript:null" id="submit">Submit</button>
 			</div>
 		</form>
 	</body>
