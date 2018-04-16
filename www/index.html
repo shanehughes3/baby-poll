@@ -20,6 +20,7 @@
 			left: 50%;
 			transform: translate(-50%, -50%);
 			margin: 0;
+			padding-bottom: 5em;
 		}
 		.queued {
 			position: absolute;
@@ -47,6 +48,9 @@
 		#landing {
 			position: relative;
 		}
+		.input-val {
+			display: inline-block;
+		}
 		</style>
 		<script>
 		window.onload = function() {
@@ -62,6 +66,11 @@
 				buttons[i].onclick = next;
 			}
 			document.querySelector('#landing').classList.add('live');
+			window.vals = {
+				lb: 7,
+				oz: 8
+			};
+			resetDisplays();
 		}
 		
 		function next(e) {
@@ -95,13 +104,25 @@
 		function submit() {
 			console.log('Submit called');
 		}
+		function incrementVal(unit) {
+			window.vals[unit] += 1;
+			resetDisplays();
+		}
+		function decrementVal(unit) {
+			window.vals[unit] -= 1;
+			resetDisplays();
+		}
+		function resetDisplays() {
+			document.querySelector('#lb-display').innerHTML = window.vals.lb;
+			document.querySelector('#oz-display').innerHTML = window.vals.oz;
+		}
 		</script>
 	</head>
 	<body>
 		<form id="container">
 			<div id="landing" class="display">
 				<h1>Ellen and Shane are having another baby!</h1>
-				<p>We'd like to take a survey to see what people think. Can you answer four quick questions?</p>
+				<p>We'd like to take a survey to see what people will predict. Can you answer four quick questions?</p>
 				<button type=button id="landing-next-button">Start</button>
 			</div>
 			<div id="q1" class="queued">
@@ -121,6 +142,16 @@
 			<div id="q3" class="queued">
 				<h1>How much do you think the baby will weigh?</h1>
 				<p>Francis weighed 8 lbs. 13 oz.</p>
+				<div class="input-val">
+					<div onclick="incrementVal('lb')">+</div>
+					<span id="lb-display"></span><span>lb.</span>
+					<div onclick="decrementVal('lb')">-</div>
+				</div>
+				<div class="input-val">
+					<div onclick="incrementVal('oz')">+</div>
+					<span id="oz-display"></span><span>oz.</span>
+					<div onclick="decrementVal('oz')">-</div>
+				</div>
 				<button type=button id="q3-next-button">Next</button>
 			</div>
 			<div id="q4" class="queued">
