@@ -113,8 +113,8 @@
 			resetDisplays();
 		}
 		function resetDisplays() {
-			document.querySelector('#lb-display').innerHTML = window.vals.lb;
-			document.querySelector('#oz-display').innerHTML = window.vals.oz;
+			document.querySelector('#lb-display').value = window.vals.lb;
+			document.querySelector('#oz-display').value = window.vals.oz;
 		}
 		</script>
 	</head>
@@ -127,7 +127,7 @@
 			</div>
 			<div id="q1" class="queued">
 				<h1>What do you think the sex of the baby will be?</h1>
-				<p>Our first was a boy: Francis</p>
+				<p class="hint-text">Our first was a boy: Francis</p>
 				<input type="radio" name="sex" value="male" id="sex-male-radio">
 				<label for="sex-male-radio">Boy</label>
 				<input type="radio" name="sex" value="male">
@@ -136,20 +136,20 @@
 			</div>
 			<div id="q2" class="queued">
 				<h1>When do you think the baby will be born?</h1>
-				<p>Francis was induced 5 days after his due date</p>
+				<p class="hint-text">Francis was induced 5 days after his due date</p>
 				<button type=button id="q2-next-button">Next</button>
 			</div>
 			<div id="q3" class="queued">
 				<h1>How much do you think the baby will weigh?</h1>
-				<p>Francis weighed 8 lbs. 13 oz.</p>
+				<p class="hint-text">Francis weighed 8 lbs. 13 oz.</p>
 				<div class="input-val">
 					<div onclick="incrementVal('lb')">+</div>
-					<span id="lb-display"></span><span>lb.</span>
+					<input type="text" id="lb-display" name="weight-lb"></input><span>lb.</span>
 					<div onclick="decrementVal('lb')">-</div>
 				</div>
 				<div class="input-val">
 					<div onclick="incrementVal('oz')">+</div>
-					<span id="oz-display"></span><span>oz.</span>
+					<input type="text" id="oz-display" name="weight-oz"></input><span>oz.</span>
 					<div onclick="decrementVal('oz')">-</div>
 				</div>
 				<button type=button id="q3-next-button">Next</button>
