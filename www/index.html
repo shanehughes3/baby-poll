@@ -68,7 +68,8 @@
 			document.querySelector('#landing').classList.add('live');
 			window.vals = {
 				lb: 7,
-				oz: 8
+				oz: 8,
+				in: 20
 			};
 			resetDisplays();
 		}
@@ -105,16 +106,25 @@
 			console.log('Submit called');
 		}
 		function incrementVal(unit) {
-			window.vals[unit] += 1;
+			if (unit === 'in') {
+				window.vals.in += 0.5;
+			} else {
+				window.vals[unit] += 1;
+			}
 			resetDisplays();
 		}
 		function decrementVal(unit) {
-			window.vals[unit] -= 1;
+			if (unit === 'in') {
+				window.vals.in -= 0.5;
+			} else {
+				window.vals[unit] -= 1;
+			}
 			resetDisplays();
 		}
 		function resetDisplays() {
 			document.querySelector('#lb-display').value = window.vals.lb;
 			document.querySelector('#oz-display').value = window.vals.oz;
+			document.querySelector('#in-display').value = window.vals.in.toFixed(1);
 		}
 		</script>
 	</head>
@@ -156,7 +166,12 @@
 			</div>
 			<div id="q4" class="queued">
 				<h1>How long do you think the baby will be?</h1>
-				<p></p>
+				<p class="hint-text">Francis was 21.5 inches</p>
+				<div class="input-val">
+					<div onclick="incrementVal('in')">+</div>
+					<input type="text" id="in-display" name="length-in"></input><span>inches</span>
+					<div onclick="decrementVal('in')">-</div>
+				</div>
 				<button type=button id="q4-next-button">Next</button>
 			</div>
 			<div id="end" class="queued">
