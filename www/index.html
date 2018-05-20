@@ -71,6 +71,26 @@
 				oz: 8,
 				in: 20
 			};
+			document.querySelectorAll('[integer-bind]').forEach(function(el) {
+				var target = el.getAttribute('integer-bind');
+				el.onkeyup = function() {
+					if (/^\d*$/.test(el.value)) {
+						window.vals[target] = parseInt(el.value) || 0;
+					} else {
+						el.value = window.vals[target];
+					}
+				};
+			});
+			document.querySelectorAll('[float-bind]').forEach(function(el) {
+				var target = el.getAttribute('float-bind');
+				el.onkeyup = function() {
+					if (/^\d*(?:\.\d*)?$/.test(el.value)) {
+						window.vals[target] = parseFloat(el.value) || 0;
+					} else {
+						el.value = window.vals[target];
+					}
+				};
+			});
 			resetDisplays();
 		}
 		
@@ -110,14 +130,30 @@
 				window.vals.in += 0.5;
 			} else {
 				window.vals[unit] += 1;
+				if (unit === 'oz' && window.vals.oz > 15) {
+					window.vals.lb += Math.floor(window.vals.oz / 16);
+					window.vals.oz = window.vals.oz % 16;
+				}
 			}
 			resetDisplays();
 		}
 		function decrementVal(unit) {
 			if (unit === 'in') {
-				window.vals.in -= 0.5;
+				window.vals.in -= 0.5;n
 			} else {
 				window.vals[unit] -= 1;
+				if (unit === 'oz' && window.vals.oz < 0) {
+					if (window.vals.lb < 1) {
+						window.vals.lb = 0;
+						window.vals.oz = 0;
+					} else {
+						--window.vals.lb;
+						window.vals.oz = 15;
+					}
+				}
+			}
+			if (window.vals[unit] < 0) {
+				window.vals[unit] = 0;
 			}
 			resetDisplays();
 		}
@@ -154,12 +190,12 @@
 				<p class="hint-text">Francis weighed 8 lbs. 13 oz.</p>
 				<div class="input-val">
 					<div onclick="incrementVal('lb')">+</div>
-					<input type="text" id="lb-display" name="weight-lb"></input><span>lb.</span>
+					<input type="text" id="lb-display" name="weight-lb" integer-bind="lb"></input><span>lb.</span>
 					<div onclick="decrementVal('lb')">-</div>
 				</div>
 				<div class="input-val">
 					<div onclick="incrementVal('oz')">+</div>
-					<input type="text" id="oz-display" name="weight-oz"></input><span>oz.</span>
+					<input type="text" id="oz-display" name="weight-oz" integer-bind="oz"></input><span>oz.</span>
 					<div onclick="decrementVal('oz')">-</div>
 				</div>
 				<button type=button id="q3-next-button">Next</button>
@@ -169,7 +205,7 @@
 				<p class="hint-text">Francis was 21.5 inches</p>
 				<div class="input-val">
 					<div onclick="incrementVal('in')">+</div>
-					<input type="text" id="in-display" name="length-in"></input><span>inches</span>
+					<input type="text" id="in-display" name="length-in" float-bind="in"></input><span>inches</span>
 					<div onclick="decrementVal('in')">-</div>
 				</div>
 				<button type=button id="q4-next-button">Next</button>
