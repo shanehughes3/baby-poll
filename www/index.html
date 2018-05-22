@@ -16,6 +16,7 @@
 			position: absolute;
 			width: 70vw;
 			max-width: 700px;
+			height: 20em;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
@@ -50,6 +51,19 @@
 		}
 		.input-val {
 			display: inline-block;
+		}
+		.calendar-row {
+			font-size: 0;
+		}
+		.calendar-row>span {
+			font-size: 16px;
+			border: 1px solid black;
+			text-align: right;
+			padding-right: 0.5em;
+			width: 3em;
+			height: 3.5em;
+			display: inline-block;
+			margin: 2px;
 		}
 		</style>
 		<script>
@@ -192,6 +206,53 @@
 			<div id="q2" class="queued">
 				<h1>When do you think the baby will be born?</h1>
 				<p class="hint-text">Francis was induced 5 days after his due date</p>
+				<div class="date-picker-container">
+					<div class="calendar-row">
+						<span>22</span>
+						<span>23</span>
+						<span>24</span>
+						<span>25</span>
+						<span>26</span>
+						<span>27</span>
+						<span>28</span>
+					</div>
+					<div class="calendar-row">
+						<span>29</span>
+						<span>30</span>
+						<span>31</span>
+						<span>1</span>
+						<span>2</span>
+						<span>3</span>
+						<span>4</span>
+					</div>
+					<div class="calendar-row">
+						<span>5</span>
+						<span>6</span>
+						<span class="due-date">7</span>
+						<span>8</span>
+						<span>9</span>
+						<span>10</span>
+						<span>11</span>
+					</div>
+					<div class="calendar-row">
+						<span>12</span>
+						<span>13</span>
+						<span>14</span>
+						<span>15</span>
+						<span>16</span>
+						<span>17</span>
+						<span>18</span>
+					</div>
+					<div class="calendar-row">
+						<span>19</span>
+						<span>20</span>
+						<span>21</span>
+						<span>22</span>
+						<span>23</span>
+						<span>24</span>
+						<span>25</span>
+					</div>
+				</div>
 				<button type=button id="q2-next-button">Next</button>
 			</div>
 			<div id="q3" class="queued">
