@@ -86,7 +86,9 @@
 			window.vals = {
 				lb: 7,
 				oz: 8,
-				in: 20
+				in: 20,
+				month: 0,
+				day: 0
 			};
 			
 			document.querySelectorAll('[integer-bind]').forEach(function(el) {
@@ -190,18 +192,19 @@
 			document.querySelector('#in-display').value = window.vals.in.toFixed(1);
 		}
 		function setArrivalDateGuess(e) {
-			var day = +e.target.innerHTML;
-			var month;
-			if (day >= 22 &&
+			window.vals.day = +e.target.innerHTML;
+			if (window.vals.day >= 22 &&
 				Array.prototype.indexOf.call(
 					e.target.parentNode.parentNode.children,
 					e.target.parentNode
 				) <= 1) {
-				month = 7;
+				window.vals.month = 7;
 			} else {
-				month = 8;
+				window.vals.month = 8;
 			}
-			console.log(month, day);
+		}
+		function submit() {
+			console.log(window.vals);
 		}
 		</script>
 	</head>
@@ -303,7 +306,7 @@
 				<p>Tell us a bit about yourself and we can send you the results!</p>
 				<input type="text" name="name" placeholder="name"></input>
 				<input type="text" name="email" placeholder="email"></input>
-				<button formaction="javascript:null" id="submit">Submit</button>
+				<button formaction="javascript:null" id="submit" onclick="submit()">Submit</button>
 			</div>
 		</form>
 	</body>
