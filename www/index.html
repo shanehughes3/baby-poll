@@ -16,7 +16,7 @@
 			position: absolute;
 			width: 70vw;
 			max-width: 700px;
-			height: 20em;
+			height: 30em;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
@@ -55,7 +55,8 @@
 		.calendar-row {
 			font-size: 0;
 		}
-		.calendar-row>span {
+		.calendar-row>div {
+			display: inline-block;
 			font-size: 16px;
 			border: 1px solid black;
 			text-align: right;
@@ -114,6 +115,9 @@
 					el.parentNode.removeChild(el);
 				});
 			}
+			document.querySelectorAll('.calendar-row>div').forEach(function(el) {
+				el.onclick = setArrivalDateGuess;
+			});
 			resetDisplays();
 		}
 		
@@ -185,6 +189,20 @@
 			document.querySelector('#oz-display').value = window.vals.oz;
 			document.querySelector('#in-display').value = window.vals.in.toFixed(1);
 		}
+		function setArrivalDateGuess(e) {
+			var day = +e.target.innerHTML;
+			var month;
+			if (day >= 22 &&
+				Array.prototype.indexOf.call(
+					e.target.parentNode.parentNode.children,
+					e.target.parentNode
+				) <= 1) {
+				month = 7;
+			} else {
+				month = 8;
+			}
+			console.log(month, day);
+		}
 		</script>
 	</head>
 	<body>
@@ -208,49 +226,49 @@
 				<p class="hint-text">Francis was induced 5 days after his due date</p>
 				<div class="date-picker-container">
 					<div class="calendar-row">
-						<span>22</span>
-						<span>23</span>
-						<span>24</span>
-						<span>25</span>
-						<span>26</span>
-						<span>27</span>
-						<span>28</span>
+						<div>22</div>
+						<div>23</div>
+						<div>24</div>
+						<div>25</div>
+						<div>26</div>
+						<div>27</div>
+						<div>28</div>
 					</div>
 					<div class="calendar-row">
-						<span>29</span>
-						<span>30</span>
-						<span>31</span>
-						<span>1</span>
-						<span>2</span>
-						<span>3</span>
-						<span>4</span>
+						<div>29</div>
+						<div>30</div>
+						<div>31</div>
+						<div>1</div>
+						<div>2</div>
+						<div>3</div>
+						<div>4</div>
 					</div>
 					<div class="calendar-row">
-						<span>5</span>
-						<span>6</span>
-						<span class="due-date">7</span>
-						<span>8</span>
-						<span>9</span>
-						<span>10</span>
-						<span>11</span>
+						<div>5</div>
+						<div>6</div>
+						<div class="due-date">7</div>
+						<div>8</div>
+						<div>9</div>
+						<div>10</div>
+						<div>11</div>
 					</div>
 					<div class="calendar-row">
-						<span>12</span>
-						<span>13</span>
-						<span>14</span>
-						<span>15</span>
-						<span>16</span>
-						<span>17</span>
-						<span>18</span>
+						<div>12</div>
+						<div>13</div>
+						<div>14</div>
+						<div>15</div>
+						<div>16</div>
+						<div>17</div>
+						<div>18</div>
 					</div>
 					<div class="calendar-row">
-						<span>19</span>
-						<span>20</span>
-						<span>21</span>
-						<span>22</span>
-						<span>23</span>
-						<span>24</span>
-						<span>25</span>
+						<div>19</div>
+						<div>20</div>
+						<div>21</div>
+						<div>22</div>
+						<div>23</div>
+						<div>24</div>
+						<div>25</div>
 					</div>
 				</div>
 				<button type=button id="q2-next-button">Next</button>
