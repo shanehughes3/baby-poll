@@ -88,7 +88,8 @@
 				oz: 8,
 				in: 20,
 				month: 0,
-				day: 0
+				day: 0,
+				sex: null
 			};
 			
 			document.querySelectorAll('[integer-bind]').forEach(function(el) {
@@ -129,7 +130,13 @@
 					moveFromAndTo('landing', 'q1');
 					break;
 				case 'q1-next-button':
-					moveFromAndTo('q1', 'q2');
+					var el = document.querySelector('input[name="sex"]:checked');
+					if (el) {
+						window.vals.sex = el.value;
+						moveFromAndTo('q1', 'q2');
+					} else {
+						showError('q1');
+					}
 					break;
 				case 'q2-next-button':
 					moveFromAndTo('q2', 'q3');
@@ -220,8 +227,8 @@
 				<p class="hint-text">Our first was a boy: Francis</p>
 				<input type="radio" name="sex" value="male" id="sex-male-radio">
 				<label for="sex-male-radio">Boy</label>
-				<input type="radio" name="sex" value="male">
-				<label for="sex-male-radio">Girl</label>
+				<input type="radio" name="sex" value="female" id="sex-female-radio">
+				<label for="sex-female-radio">Girl</label>
 				<button type=button id="q1-next-button">Next</button>
 			</div>
 			<div id="q2" class="queued">
