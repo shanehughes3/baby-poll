@@ -64,6 +64,9 @@
 			display: inline-block;
 			margin: 2px;
 		}
+		.date-guess {
+			border: 2px solid green !important;
+		}
 		.error-text {
 			display: none;
 			color: red;
@@ -142,7 +145,12 @@
 					}
 					break;
 				case 'q2-next-button':
-					moveFromAndTo('q2', 'q3');
+					if (window.vals.day) {
+						toggleError(2, false);
+						moveFromAndTo('q2', 'q3');
+					} else {
+						toggleError(2, true);
+					}
 					break;
 				case 'q3-next-button':
 					moveFromAndTo('q3', 'q4');
@@ -218,6 +226,10 @@
 			} else {
 				window.vals.month = 8;
 			}
+			document.querySelectorAll('.date-guess').forEach(function(el) {
+				el.classList.remove('date-guess');
+			});
+			e.target.classList.add('date-guess');
 		}
 
 		function toggleError(q, shouldBeOn) {
@@ -301,6 +313,7 @@
 						<div>25</div>
 					</div>
 				</div>
+				<div id='q2-error' class='error-text'>Please select a day</div>
 				<button type=button id="q2-next-button">Next</button>
 			</div>
 			<div id="q3" class="queued">
