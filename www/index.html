@@ -242,6 +242,10 @@
 		function submit() {
 			window.vals.name = document.querySelector('#name-input').value;
 			window.vals.email = document.querySelector('#email-input').value;
+			var submitButton = document.querySelector('#submit');
+			var submitContainer = submitButton.parentNode;
+			submitContainer.removeChild(submitButton);
+			submitContainer.innerHTML = '...';
 			console.log(window.vals);
 		}
 		</script>
@@ -350,7 +354,9 @@
 				<p>Tell us a bit about yourself and we can send you the results!</p>
 				<input type="text" name="name" placeholder="name" id="name-input"></input>
 				<input type="text" name="email" placeholder="email" id="email-input"></input>
-				<button formaction="javascript:null" id="submit" onclick="submit()">Submit</button>
+				<div id="submit-container">
+					<button formaction="javascript:null" id="submit" onclick="submit()">Submit</button>
+				</div>
 			</div>
 		</form>
 	</body>
