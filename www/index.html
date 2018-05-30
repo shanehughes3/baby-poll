@@ -12,30 +12,39 @@
 			box-sizing: border-box;
 		}
 		.blue-bg {
-			background-color: #89cff0;
+			background-color: #89cff088;
 		}
 		.pink-bg {
-			background-color: #ffb6c1;
+			background-color: #ffb6c188;
 		}
 		#container {
 			position: absolute;
-			width: 70vw;
-			max-width: 700px;
-			top: 20vh;
+			width: 900px;
+			top: 3vh;
 			left: 50%;
 			transform: translate(-50%, 0);
 			margin: 0;
 			padding-bottom: 5em;
 		}
+		#cloud {
+			position: absolute;
+			width: 900px;
+			transform: translate(60px, 0);
+		}
+		#content {
+			padding-top: 10em;
+			position: relative;
+		}
 		.queued {
 			position: absolute;
+			top: 15em;
 			opacity: 0;
 			transform: translate(100%, 0);
 			pointer-events: none;
 		}
 		.live {
 			width: 100%;
-			top: 0;
+			top: 15em;
 			text-align: center;
 			position: absolute;
 			opacity: 1;
@@ -45,13 +54,11 @@
 		}
 		.shown {
 			position: absolute;
+			top: 15em;
 			opacity: 0;
 			transform: translate(-100%, 0);
 			transition: transform 0.8s ease-in, opacity 0.4s ease-in;
 			pointer-events: none;
-		}
-		#landing {
-			position: relative;
 		}
 		.input-val {
 			display: inline-block;
@@ -265,110 +272,130 @@
 	</head>
 	<body>
 		<form id="container">
-			<div id="landing" class="display">
-				<h1>Ellen and Shane are having another baby!</h1>
-				<p>We'd like to take a survey to see what people will predict. Can you answer four quick questions?</p>
-				<button type=button id="landing-next-button">Start</button>
-			</div>
-			<div id="q1" class="queued">
-				<div>
-					<h1>What do you think the sex of the baby will be?</h1>
-					<p class="hint-text">Our first was a boy: Francis</p>
-					<input type="radio" name="sex" value="male" id="sex-male-radio">
-					<label for="sex-male-radio">Boy</label>
-					<input type="radio" name="sex" value="female" id="sex-female-radio">
-					<label for="sex-female-radio">Girl</label>
+			<svg id='cloud' xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 47.5 30" style="enable-background:new 0 0 47.5 47.5;" id="svg2" xml:space="preserve">
+				<defs id="defs6">
+					<clipPath id="clipPath18">
+						<path d="M 0,38 38,38 38,0 0,0 0,38 z" id="path20"/>
+					</clipPath>
+				</defs>
+				<g transform="matrix(1.25,0,0,-1.25,0,47.5)" id="g12">
+					<g id="g14">
+						<g clip-path="url(#clipPath18)" id="g16">
+							<g transform="translate(28,32)" id="g22">
+								<path d="M 0,0 C -0.701,0 -1.377,-0.106 -2.015,-0.298 -2.01,-0.198 -2,-0.101 -2,0 -2,3.313 -4.687,6 -8,6 -10.769,6 -13.093,4.122 -13.785,1.573 -14.471,1.846 -15.217,2 -16,2 c -3.314,0 -6,-2.686 -6,-6 0,-3.312 2.686,-6 6,-6 2.769,0 5.093,1.878 5.785,4.428 C -9.529,-5.845 -8.783,-6 -8,-6 c 0.375,0 0.74,0.039 1.096,0.104 C -6.962,-6.256 -7,-6.623 -7,-7 c 0,-3.865 3.135,-7 7,-7 3.865,0 7,3.135 7,7 0,3.866 -3.135,7 -7,7" id="path24" style="fill:#e7e7e7;fill-opacity:1;fill-rule:nonzero;stroke:none"/>
+							</g>
+							<g transform="translate(32,25)" id="g26"><path d="M 0,0 C -0.467,0 -0.91,-0.085 -1.339,-0.204 -1.123,0.322 -1,0.896 -1,1.5 -1,3.985 -3.015,6 -5.5,6 -6.519,6 -7.447,5.649 -8.201,5.079 -8.907,7.904 -11.456,10 -14.5,10 -17.338,10 -19.745,8.178 -20.631,5.643 -21.379,5.875 -22.175,6 -23,6 c -4.418,0 -8,-3.582 -8,-8 0,-4.419 3.582,-8 8,-8 l 23,0 c 2.762,0 5,2.238 5,5 0,2.762 -2.238,5 -5,5" id="path28" style="fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:none"/>
+							</g>
+						</g>
+					</g>
+				</g>
+			</svg>
+			<div id="content">
+				<div id="landing" class="display">
+					<h1>Ellen and Shane are having another baby!</h1>
+					<p>We'd like to take a survey to see what people will predict. Can you answer four quick questions?</p>
+					<button type=button id="landing-next-button">Start</button>
 				</div>
-				<div>
-					<div id='q1-error' class='error-text'>Please select an option</div>
-					<button type=button id="q1-next-button">Next</button>
-				</div>
-			</div>
-			<div id="q2" class="queued">
-				<h1>When do you think the baby will be born?</h1>
-				<p class="hint-text">Francis was induced 5 days after his due date</p>
-				<div class="date-picker-container">
-					<div class="calendar-row">
-						<div>22</div>
-						<div>23</div>
-						<div>24</div>
-						<div>25</div>
-						<div>26</div>
-						<div>27</div>
-						<div>28</div>
+				<div id="q1" class="queued">
+					<div>
+						<h1>What do you think the sex of the baby will be?</h1>
+						<p class="hint-text">Our first was a boy: Francis</p>
+						<input type="radio" name="sex" value="male" id="sex-male-radio">
+						<label for="sex-male-radio">Boy</label>
+						<input type="radio" name="sex" value="female" id="sex-female-radio">
+						<label for="sex-female-radio">Girl</label>
 					</div>
-					<div class="calendar-row">
-						<div>29</div>
-						<div>30</div>
-						<div>31</div>
-						<div>1</div>
-						<div>2</div>
-						<div>3</div>
-						<div>4</div>
-					</div>
-					<div class="calendar-row">
-						<div>5</div>
-						<div>6</div>
-						<div class="due-date">7</div>
-						<div>8</div>
-						<div>9</div>
-						<div>10</div>
-						<div>11</div>
-					</div>
-					<div class="calendar-row">
-						<div>12</div>
-						<div>13</div>
-						<div>14</div>
-						<div>15</div>
-						<div>16</div>
-						<div>17</div>
-						<div>18</div>
-					</div>
-					<div class="calendar-row">
-						<div>19</div>
-						<div>20</div>
-						<div>21</div>
-						<div>22</div>
-						<div>23</div>
-						<div>24</div>
-						<div>25</div>
+					<div>
+						<div id='q1-error' class='error-text'>Please select an option</div>
+						<button type=button id="q1-next-button">Next</button>
 					</div>
 				</div>
-				<div id='q2-error' class='error-text'>Please select a day</div>
-				<button type=button id="q2-next-button">Next</button>
-			</div>
-			<div id="q3" class="queued">
-				<h1>How much do you think the baby will weigh?</h1>
-				<p class="hint-text">Francis weighed 8 lbs. 13 oz.</p>
-				<div class="input-val">
-					<div onclick="incrementVal('lb')">+</div>
-					<input type="text" id="lb-display" name="weight-lb" integer-bind="lb"></input><span>lb.</span>
-					<div onclick="decrementVal('lb')">-</div>
+				<div id="q2" class="queued">
+					<h1>When do you think the baby will be born?</h1>
+					<p class="hint-text">Francis was induced 5 days after his due date</p>
+					<div class="date-picker-container">
+						<div class="calendar-row">
+							<div>22</div>
+							<div>23</div>
+							<div>24</div>
+							<div>25</div>
+							<div>26</div>
+							<div>27</div>
+							<div>28</div>
+						</div>
+						<div class="calendar-row">
+							<div>29</div>
+							<div>30</div>
+							<div>31</div>
+							<div>1</div>
+							<div>2</div>
+							<div>3</div>
+							<div>4</div>
+						</div>
+						<div class="calendar-row">
+							<div>5</div>
+							<div>6</div>
+							<div class="due-date">7</div>
+							<div>8</div>
+							<div>9</div>
+							<div>10</div>
+							<div>11</div>
+						</div>
+						<div class="calendar-row">
+							<div>12</div>
+							<div>13</div>
+							<div>14</div>
+							<div>15</div>
+							<div>16</div>
+							<div>17</div>
+							<div>18</div>
+						</div>
+						<div class="calendar-row">
+							<div>19</div>
+							<div>20</div>
+							<div>21</div>
+							<div>22</div>
+							<div>23</div>
+							<div>24</div>
+							<div>25</div>
+						</div>
+					</div>
+					<div id='q2-error' class='error-text'>Please select a day</div>
+					<button type=button id="q2-next-button">Next</button>
 				</div>
-				<div class="input-val">
-					<div onclick="incrementVal('oz')">+</div>
-					<input type="text" id="oz-display" name="weight-oz" integer-bind="oz"></input><span>oz.</span>
-					<div onclick="decrementVal('oz')">-</div>
+				<div id="q3" class="queued">
+					<h1>How much do you think the baby will weigh?</h1>
+					<p class="hint-text">Francis weighed 8 lbs. 13 oz.</p>
+					<div class="input-val">
+						<div onclick="incrementVal('lb')">+</div>
+						<input type="text" id="lb-display" name="weight-lb" integer-bind="lb"></input><span>lb.</span>
+						<div onclick="decrementVal('lb')">-</div>
+					</div>
+					<div class="input-val">
+						<div onclick="incrementVal('oz')">+</div>
+						<input type="text" id="oz-display" name="weight-oz" integer-bind="oz"></input><span>oz.</span>
+						<div onclick="decrementVal('oz')">-</div>
+					</div>
+					<button type=button id="q3-next-button">Next</button>
 				</div>
-				<button type=button id="q3-next-button">Next</button>
-			</div>
-			<div id="q4" class="queued">
-				<h1>How long do you think the baby will be?</h1>
-				<p class="hint-text">Francis was 21.5 inches</p>
-				<div class="input-val">
-					<div onclick="incrementVal('in')">+</div>
-					<input type="text" id="in-display" name="length-in" float-bind="in"></input><span>inches</span>
-					<div onclick="decrementVal('in')">-</div>
+				<div id="q4" class="queued">
+					<h1>How long do you think the baby will be?</h1>
+					<p class="hint-text">Francis was 21.5 inches</p>
+					<div class="input-val">
+						<div onclick="incrementVal('in')">+</div>
+						<input type="text" id="in-display" name="length-in" float-bind="in"></input><span>inches</span>
+						<div onclick="decrementVal('in')">-</div>
+					</div>
+					<button type=button id="q4-next-button">Next</button>
 				</div>
-				<button type=button id="q4-next-button">Next</button>
-			</div>
-			<div id="end" class="queued">
-				<h1>Great! Just one more thing...</h1>
-				<p>Tell us a bit about yourself and we can send you the results!</p>
-				<input type="text" name="name" placeholder="name" id="name-input"></input>
-				<input type="text" name="email" placeholder="email" id="email-input"></input>
-				<div id="submit-container">
-					<button formaction="javascript:null" id="submit" onclick="submit()">Submit</button>
+				<div id="end" class="queued">
+					<h1>Great! Just one more thing...</h1>
+					<p>Tell us a bit about yourself and we can send you the results!</p>
+					<input type="text" name="name" placeholder="name" id="name-input"></input>
+					<input type="text" name="email" placeholder="email" id="email-input"></input>
+					<div id="submit-container">
+						<button formaction="javascript:null" id="submit" onclick="submit()">Submit</button>
+					</div>
 				</div>
 			</div>
 		</form>
