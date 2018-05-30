@@ -13,6 +13,7 @@
 			box-sizing: border-box;
 			font-family: 'Quattrocento Sans', sans-serif;
 			color: #444444;
+			line-spacing: 1.5;
 		}
 		.blue-bg {
 			background-color: #89cff088;
@@ -40,12 +41,12 @@
 		}
 		button {
 			cursor: pointer;
-			color: #a0a0a0;
+			color: #444444;
 			background-color: #f9f9f9;
 			padding: 0.2em;
 			border-radius: 5px;
 			box-shadow: none;
-			border: 1px solid #a0a0a0;
+			border: 1px solid #444444;
 			font-size: 1.2em;
 		}
 		.queued {
@@ -72,6 +73,13 @@
 			transform: translate(-100%, 0);
 			transition: transform 0.8s ease-in, opacity 0.4s ease-in;
 			pointer-events: none;
+		}
+		.input-list {
+			display: inline-block;
+			margin-left: 2em;
+			margin-right: 2em;
+			vertical-align: middle;
+			line-height: 2;
 		}
 		.input-val {
 			display: inline-block;
@@ -313,15 +321,21 @@
 					<div>
 						<h1>What do you think the sex of the baby will be?</h1>
 						<p class="hint-text">Our first was a boy: Francis</p>
-						<input type="radio" name="sex" value="male" id="sex-male-radio">
-						<label for="sex-male-radio">Boy</label>
-						<input type="radio" name="sex" value="female" id="sex-female-radio">
-						<label for="sex-female-radio">Girl</label>
 					</div>
-					<div>
+					<span class="input-list">
+						<div>
+							<input type="radio" name="sex" value="male" id="sex-male-radio">
+							<label for="sex-male-radio">Boy</label>
+						</div>
+						<div>
+							<input type="radio" name="sex" value="female" id="sex-female-radio">
+							<label for="sex-female-radio">Girl</label>
+						</div>
+					</span>
+					<span class="input-list">
 						<div id='q1-error' class='error-text'>Please select an option</div>
 						<button type=button id="q1-next-button">NEXT</button>
-					</div>
+					</span>
 				</div>
 				<div id="q2" class="queued">
 					<h1>When do you think the baby will be born?</h1>
