@@ -11,6 +11,12 @@
 			padding: 0;
 			box-sizing: border-box;
 		}
+		.blue-bg {
+			background-color: #89cff0;
+		}
+		.pink-bg {
+			background-color: #ffb6c1;
+		}
 		#container {
 			position: absolute;
 			width: 70vw;
@@ -124,6 +130,13 @@
 				document.querySelectorAll('.hint-text').forEach(function(el) {
 					el.parentNode.removeChild(el);
 				});
+			}
+			if (Math.random() >= 0.5) {
+				window.vals.b = 'b';
+				document.querySelector('body').classList.add('blue-bg');
+			} else {
+				window.vals.b = 'p';
+				document.querySelector('body').classList.add('pink-bg');
 			}
 			document.querySelectorAll('.calendar-row>div').forEach(function(el) {
 				el.onclick = setArrivalDateGuess;
