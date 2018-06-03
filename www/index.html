@@ -126,10 +126,9 @@
 				lb: 7,
 				oz: 8,
 				in: 20,
-				month: 0,
-				day: 0,
 				sex: null,
-				c: true
+				c: true,
+				date: 0
 			};
 			
 			document.querySelectorAll('[integer-bind]').forEach(function(el) {
@@ -166,9 +165,10 @@
 				window.vals.b = 'p';
 				document.querySelector('body').classList.add('pink-bg');
 			}
-			document.querySelectorAll('.calendar-row>div').forEach(function(el) {
-				el.onclick = setArrivalDateGuess;
-			});
+			document.querySelector('#date-picker').oninput = function(e) {
+				window.vals.date = +e.target.value;
+				updateDatePickerDisplay();
+			};
 			resetDisplays();
 		}
 		
@@ -188,12 +188,7 @@
 					}
 					break;
 				case 'q2-next-button':
-					if (window.vals.day) {
-						toggleError(2, false);
-						moveFromAndTo('q2', 'q3');
-					} else {
-						toggleError(2, true);
-					}
+					moveFromAndTo('q2', 'q3');
 					break;
 				case 'q3-next-button':
 					moveFromAndTo('q3', 'q4');
@@ -257,6 +252,30 @@
 			document.querySelector('#oz-display').value = window.vals.oz;
 			document.querySelector('#in-display').value = window.vals.in.toFixed(1);
 		}
+
+		function updateDatePickerDisplay() {
+			var relDate, calDate, date = window.vals.date;
+			var dayWord = " days";
+			var relWord = " after"
+			if (Math.abs(date) === 1) {
+				dayWord = " day";
+			}
+			if (date < 0) {
+				relWord = " before";
+			}
+			if (date !== 0) {
+				relDate = Math.abs(date) + dayWord + relWord + " due date";
+			} else {
+				relDate = "Due date";
+			}
+			if (date < -6) {
+				calDate = "July " + (31 + date + 7);
+			} else {
+				calDate = "August " + (date + 7);
+			}
+			document.querySelector('#date-picker-feedback-relative').innerHTML = relDate;
+			document.querySelector('#date-picker-feedback-calendar').innerHTML = calDate;
+		};
 		
 		function setArrivalDateGuess(e) {
 			window.vals.day = +e.target.innerHTML;
@@ -341,51 +360,9 @@
 					<h1>When do you think the baby will be born?</h1>
 					<p class="hint-text">Francis was induced 5 days after his due date</p>
 					<div class="date-picker-container">
-						<div class="calendar-row">
-							<div>22</div>
-							<div>23</div>
-							<div>24</div>
-							<div>25</div>
-							<div>26</div>
-							<div>27</div>
-							<div>28</div>
-						</div>
-						<div class="calendar-row">
-							<div>29</div>
-							<div>30</div>
-							<div>31</div>
-							<div>1</div>
-							<div>2</div>
-							<div>3</div>
-							<div>4</div>
-						</div>
-						<div class="calendar-row">
-							<div>5</div>
-							<div>6</div>
-							<div class="due-date">7</div>
-							<div>8</div>
-							<div>9</div>
-							<div>10</div>
-							<div>11</div>
-						</div>
-						<div class="calendar-row">
-							<div>12</div>
-							<div>13</div>
-							<div>14</div>
-							<div>15</div>
-							<div>16</div>
-							<div>17</div>
-							<div>18</div>
-						</div>
-						<div class="calendar-row">
-							<div>19</div>
-							<div>20</div>
-							<div>21</div>
-							<div>22</div>
-							<div>23</div>
-							<div>24</div>
-							<div>25</div>
-						</div>
+						<input type="range" min="-14" max="14" id="date-picker" />
+						<div id="date-picker-feedback-relative">Due date</div>
+						<div id="date-picker-feedback-calendar">August 7</div>
 					</div>
 					<div id='q2-error' class='error-text'>Please select a day</div>
 					<button type=button id="q2-next-button">Next</button>
