@@ -87,8 +87,12 @@
 		#date-picker {
 			width: 20em;
 		}
-		.date-picker-container {
-			margin-bottom: 1em;
+		.weight-input-container>* {
+			vertical-align: middle;
+			display: inline-block;
+		}
+		.weight-input-container>div>input {
+			text-align: center;
 		}
 		.error-text {
 			display: none;
@@ -359,17 +363,19 @@
 				<div id="q3" class="queued">
 					<h1>How much do you think the baby will weigh?</h1>
 					<p class="hint-text">Francis weighed 8 lbs. 13 oz.</p>
-					<div class="input-val">
-						<div onclick="incrementVal('lb')">+</div>
-						<input type="text" id="lb-display" name="weight-lb" integer-bind="lb"></input><span>lb.</span>
-						<div onclick="decrementVal('lb')">-</div>
+					<div class="weight-input-container">
+						<div class="input-val">
+							<div onclick="incrementVal('lb')">+</div>
+							<input type="text" id="lb-display" name="weight-lb" integer-bind="lb" size="1"></input><span>lb.</span>
+							<div onclick="decrementVal('lb')">-</div>
+						</div>
+						<div class="input-val">
+							<div onclick="incrementVal('oz')">+</div>
+							<input type="text" id="oz-display" name="weight-oz" integer-bind="oz" size = "1"></input><span>oz.</span>
+							<div onclick="decrementVal('oz')">-</div>
+						</div>
+						<button type=button id="q3-next-button">Next</button>
 					</div>
-					<div class="input-val">
-						<div onclick="incrementVal('oz')">+</div>
-						<input type="text" id="oz-display" name="weight-oz" integer-bind="oz"></input><span>oz.</span>
-						<div onclick="decrementVal('oz')">-</div>
-					</div>
-					<button type=button id="q3-next-button">Next</button>
 				</div>
 				<div id="q4" class="queued">
 					<h1>How long do you think the baby will be?</h1>
