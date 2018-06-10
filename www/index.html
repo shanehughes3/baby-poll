@@ -87,6 +87,40 @@
 		.input-val {
 			display: inline-block;
 		}
+		.plus-button, .minus-button {
+			width: 100%;
+			height: 1em;
+			position: relative;
+			margin-top: 0.5em;
+			margin-bottom: 0.5em;
+			cursor: pointer;
+		}
+		.plus-button::before {
+			position: absolute;
+			width: 1em;
+			height: 1em;
+			border-left: 1px solid #444444;
+			content: " ";
+			left: 50%;
+		}
+		.plus-button::after {
+			position: absolute;
+			width: 1em;
+			height: 1em;
+			border-bottom: 1px solid #444444;
+			content: " ";
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}		
+		.minus-button::after {
+			position: absolute;
+			width: 1em;
+			border-bottom: 1px solid #444444;
+			content: " ";
+			left: 50%;
+			height: 1em;
+			transform: translate(-50%, -50%);
+		}
 		#date-picker {
 			width: 20em;
 		}
@@ -370,15 +404,15 @@
 					<p class="hint-text">Francis weighed 8 lbs. 13 oz.</p>
 					<div class="weight-input-container">
 						<div class="input-val">
-							<div onclick="incrementVal('lb')">+</div>
+							<div onclick="incrementVal('lb')" class="plus-button"></div>
 							<input type="text" id="lb-display" name="weight-lb" integer-bind="lb" size="1"></input>
-							<div onclick="decrementVal('lb')">-</div>
+							<div onclick="decrementVal('lb')" class="minus-button"></div>
 						</div>
 						<span>lb.</span>
 						<div class="input-val">
-							<div onclick="incrementVal('oz')">+</div>
+							<div onclick="incrementVal('oz')" class="plus-button"></div>
 							<input type="text" id="oz-display" name="weight-oz" integer-bind="oz" size="1"></input>
-							<div onclick="decrementVal('oz')">-</div>
+							<div onclick="decrementVal('oz')" class="minus-button"></div>
 						</div>
 						<span>oz.</span>
 					</div>
@@ -391,9 +425,9 @@
 					<p class="hint-text">Francis was 21.5 inches</p>
 					<div class="length-input-container">
 						<div class="input-val">
-							<div onclick="incrementVal('in')">+</div>
+							<div onclick="incrementVal('in')" class="plus-button"></div>
 							<input type="text" id="in-display" name="length-in" float-bind="in" size="1"></input>
-							<div onclick="decrementVal('in')">-</div>
+							<div onclick="decrementVal('in')" class="minus-button"></div>
 						</div>
 						<span>inches</span>
 					</div>
