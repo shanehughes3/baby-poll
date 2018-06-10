@@ -49,6 +49,9 @@
 			border: 1px solid #444444;
 			font-size: 1.2em;
 		}
+		.button-container {
+			margin-top: 1em;
+		}
 		.queued {
 			position: absolute;
 			top: 15em;
@@ -87,11 +90,11 @@
 		#date-picker {
 			width: 20em;
 		}
-		.weight-input-container>* {
+		.weight-input-container>*, .length-input-container>* {
 			vertical-align: middle;
 			display: inline-block;
 		}
-		.weight-input-container>div>input {
+		.weight-input-container>div>input, .length-input-container>div>input {
 			text-align: center;
 		}
 		.error-text {
@@ -358,7 +361,9 @@
 						<div id="date-picker-feedback-calendar">August 7</div>
 					</div>
 					<div id='q2-error' class='error-text'>Please select a day</div>
-					<button type=button id="q2-next-button">Next</button>
+					<div class="button-container">
+						<button type=button id="q2-next-button">Next</button>
+					</div>
 				</div>
 				<div id="q3" class="queued">
 					<h1>How much do you think the baby will weigh?</h1>
@@ -366,33 +371,42 @@
 					<div class="weight-input-container">
 						<div class="input-val">
 							<div onclick="incrementVal('lb')">+</div>
-							<input type="text" id="lb-display" name="weight-lb" integer-bind="lb" size="1"></input><span>lb.</span>
+							<input type="text" id="lb-display" name="weight-lb" integer-bind="lb" size="1"></input>
 							<div onclick="decrementVal('lb')">-</div>
 						</div>
+						<span>lb.</span>
 						<div class="input-val">
 							<div onclick="incrementVal('oz')">+</div>
-							<input type="text" id="oz-display" name="weight-oz" integer-bind="oz" size = "1"></input><span>oz.</span>
+							<input type="text" id="oz-display" name="weight-oz" integer-bind="oz" size="1"></input>
 							<div onclick="decrementVal('oz')">-</div>
 						</div>
+						<span>oz.</span>
+					</div>
+					<div class="button-container">
 						<button type=button id="q3-next-button">Next</button>
 					</div>
 				</div>
 				<div id="q4" class="queued">
 					<h1>How long do you think the baby will be?</h1>
 					<p class="hint-text">Francis was 21.5 inches</p>
-					<div class="input-val">
-						<div onclick="incrementVal('in')">+</div>
-						<input type="text" id="in-display" name="length-in" float-bind="in"></input><span>inches</span>
-						<div onclick="decrementVal('in')">-</div>
+					<div class="length-input-container">
+						<div class="input-val">
+							<div onclick="incrementVal('in')">+</div>
+							<input type="text" id="in-display" name="length-in" float-bind="in" size="1"></input>
+							<div onclick="decrementVal('in')">-</div>
+						</div>
+						<span>inches</span>
 					</div>
-					<button type=button id="q4-next-button">Next</button>
+					<div class="button-container">
+						<button type=button id="q4-next-button">Next</button>
+					</div>
 				</div>
 				<div id="end" class="queued">
 					<h1>Great! Just one more thing...</h1>
 					<p>Tell us a bit about yourself and we can send you the results!</p>
 					<input type="text" name="name" placeholder="name" id="name-input"></input>
 					<input type="text" name="email" placeholder="email" id="email-input"></input>
-					<div id="submit-container">
+					<div class="button-container">
 						<button formaction="javascript:null" id="submit" onclick="submit()">SUBMIT</button>
 					</div>
 				</div>
