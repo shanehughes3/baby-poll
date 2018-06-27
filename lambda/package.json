@@ -1,0 +1,13 @@
+{
+  "name": "baby-poll-lambda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+	  "zip": "zip -r baby-poll-lambda.zip index.js node_modules/",
+	  "sync": "aws s3 cp ./baby-poll-lambda.zip s3://shughes-lambda-zips"
+  },
+  "author": "",
+  "license": "GPL-2.0"
+}
