@@ -244,10 +244,6 @@
 			document.getElementById(b).classList.add('live');
 		}
 		
-		function submit() {
-			console.log('Submit called');
-		}
-		
 		function incrementVal(unit) {
 			if (unit === 'in') {
 				window.vals.in += 0.5;
@@ -342,6 +338,18 @@
 			submitContainer.removeChild(submitButton);
 			submitContainer.innerHTML = '...';
 			console.log(window.vals);
+			var xhr = new XMLHttpRequest();
+			xhr.open(
+				'POST',
+				'https://z8vd29t9k5.execute-api.us-east-1.amazonaws.com/prod/baby-poll'
+			);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.send(JSON.stringify(window.vals));
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === XMLHttpRequest.DONE) {
+					console.log('RESPONSE', xhr.status);
+				}
+			};
 		}
 		</script>
 	</head>
