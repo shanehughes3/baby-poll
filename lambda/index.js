@@ -43,6 +43,32 @@ function submitToSDB(data) {
 			credentials: cred,
 			region: 'us-east-1'
 		}));
-		resolve();
+		const params = {
+			DomainName: 'baby-poll',
+			ItemName: data.email,
+			Expected: {
+				Name: 'submittedAt',
+				Exists: false
+			}
+		};
+		params.Attributes = Object.keys(data).map((key) => {
+			return {
+				Name: key,
+				Value: data[key]
+			};
+		});
+		params.Attributes.push({
+			Name: 'submittedAt',
+			Value: new Date().toISOString()
+		});
+		sdb.putAttributes(params, (err, res) => {
+			if (err) {
+				console.log(err);
+				throw err;
+			}
+			console.log(res);
+			resolve();
+		});
+
 	});
 }
