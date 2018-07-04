@@ -14,6 +14,9 @@ exports.handler = (event, context, cb) => {
 		submitToSDB(input)
 			.then(() => {
 				res.statusCode = 204;
+				res.headers = {
+					'Access-Control-Allow-Origin': '*'
+				};
 				cb(null, res);
 			})
 			.catch((err) => {
@@ -26,6 +29,11 @@ exports.handler = (event, context, cb) => {
 				error: 'Non-JSON body',
 				input: event.body
 			};
+		} else if (err.name === 'ConditionalCheckFailed') {
+			res.statusCode = 400;
+			res.body = {
+				error: 'Already submitted'
+			};
 		} else {
 			console.log(err);
 			res.statusCode = 500;
@@ -33,6 +41,9 @@ exports.handler = (event, context, cb) => {
 		if (res.body) {
 			res.body = JSON.stringify(res.body);
 		}
+		res.headers = {
+			'Access-Control-Allow-Origin': '*'
+		};
 		cb(null, res);
 	}
 };
