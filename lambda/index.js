@@ -6,7 +6,8 @@ exports.handler = (event, context, cb) => {
 	try {
 		input = JSON.parse(event.body);
 		['lb', 'oz', 'in', 'sex', 'c', 'b', 'date', 'name', 'email'].forEach((key) => {
-			if (!input.hasOwnProperty(key)) {
+			if (!input.hasOwnProperty(key) || input[key] === null ||
+			   input[key] === '') {
 				throw new Error(`Missing required value ${key}`);
 			}
 		});
