@@ -5,7 +5,7 @@ exports.handler = (event, context, cb) => {
 	const res = {};
 	try {
 		input = JSON.parse(event.body);
-		['lb', 'oz', 'in', 'sex', 'c', 'b', 'date'].forEach((key) => {
+		['lb', 'oz', 'in', 'sex', 'c', 'b', 'date', 'name', 'email'].forEach((key) => {
 			if (!input.hasOwnProperty(key)) {
 				throw new Error(`Missing required value ${key}`);
 			}
@@ -14,6 +14,9 @@ exports.handler = (event, context, cb) => {
 			.then(() => {
 				res.statusCode = 204;
 				cb(null, res);
+			})
+			.catch((err) => {
+				throw err;
 			});
 	} catch (err) {
 		if (err.name === 'SyntaxError') {
@@ -54,7 +57,7 @@ function submitToSDB(data) {
 		params.Attributes = Object.keys(data).map((key) => {
 			return {
 				Name: key,
-				Value: data[key]
+				Value: data[key].toString()
 			};
 		});
 		params.Attributes.push({
