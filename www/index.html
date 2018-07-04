@@ -140,6 +140,18 @@
 			display: none;
 			color: red;
 		}
+		.loader {
+			border: 3px solid #f3f3f3;
+			border-top: 3px solid #3498db;
+			border-radius: 50%;
+			width: 2em;
+			height: 2em;
+			animation: spin 2s linear infinite;
+		}
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
 		</style>
 		<script>
 		window.onload = function() {
@@ -336,7 +348,9 @@
 			var submitButton = document.querySelector('#submit');
 			var submitContainer = submitButton.parentNode;
 			submitContainer.removeChild(submitButton);
-			submitContainer.innerHTML = '...';
+			var spinner = document.createElement('div');
+			spinner.className =  'loader';
+			submitContainer.appendChild(spinner);
 			console.log(window.vals);
 			var xhr = new XMLHttpRequest();
 			xhr.open(
@@ -345,9 +359,11 @@
 			);
 			xhr.setRequestHeader('Content-Type', 'application/json');
 			xhr.send(JSON.stringify(window.vals));
-			xhr.onreadystatechange = function() {
+			xhr.onreadystatechange = function(a) {
 				if (xhr.readyState === XMLHttpRequest.DONE) {
 					console.log('RESPONSE', xhr.status);
+					console.log({a});
+					submitContainer.innerHTML = 'OK';
 				}
 			};
 		}
