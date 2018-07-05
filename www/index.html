@@ -57,6 +57,8 @@
 		}
 		.button-container {
 			margin-top: 1em;
+			display: flex;
+			justify-content: center;
 		}
 		.queued {
 			position: absolute;
@@ -352,7 +354,6 @@
 			var spinner = document.createElement('div');
 			spinner.className =  'loader';
 			submitContainer.appendChild(spinner);
-			console.log(window.vals);
 			var xhr = new XMLHttpRequest();
 			xhr.open(
 				'POST',
@@ -363,8 +364,12 @@
 			xhr.onreadystatechange = function(a) {
 				if (xhr.readyState === XMLHttpRequest.DONE) {
 					console.log('RESPONSE', xhr.status);
-					console.log({a});
-					submitContainer.innerHTML = 'OK';
+					if (xhr.status === 200) {
+						submitContainer.innerHTML = 'OK';
+					} else {
+						submitContainer.innerHTML = '';
+						submitContainer.appendChild(submitButton);
+					}
 				}
 			};
 		}
