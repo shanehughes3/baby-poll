@@ -350,9 +350,10 @@
 			window.vals.email = document.querySelector('#email-input').value;
 			var submitButton = document.querySelector('#submit');
 			var submitContainer = submitButton.parentNode;
-			submitContainer.removeChild(submitButton);
+			var feedback = document.querySelector('#submit-feedback');
 			var spinner = document.createElement('div');
-			spinner.className =  'loader';
+			submitContainer.removeChild(submitButton);
+			spinner.className = 'loader';
 			submitContainer.appendChild(spinner);
 			var xhr = new XMLHttpRequest();
 			xhr.open(
@@ -364,11 +365,13 @@
 			xhr.onreadystatechange = function(a) {
 				if (xhr.readyState === XMLHttpRequest.DONE) {
 					console.log('RESPONSE', xhr.status);
-					if (xhr.status === 200) {
-						submitContainer.innerHTML = 'OK';
+					if (xhr.status === 204) {
+						submitContainer.innerHTML = 'Got it!';
+						feedback.innerHTML = 'Thanks, we\'ll let you know what happens!';
 					} else {
 						submitContainer.innerHTML = '';
 						submitContainer.appendChild(submitButton);
+						feedback.innerHTML = 'Sorry, something went wrong - maybe try again later';
 					}
 				}
 			};
@@ -478,6 +481,7 @@
 					<div class="button-container">
 						<button formaction="javascript:null" id="submit" onclick="submit()">Submit</button>
 					</div>
+					<div id="submit-feedback"></div>
 				</div>
 			</div>
 		</form>
