@@ -184,7 +184,8 @@
 				date: 0
 			};
 			
-			document.querySelectorAll('[integer-bind]').forEach(function(el) {
+			var intButtons = document.querySelectorAll('[integer-bind]');
+			Array.prototype.forEach.call(intButtons, function(el) {
 				var target = el.getAttribute('integer-bind');
 				el.onkeyup = function() {
 					if (/^\d*$/.test(el.value)) {
@@ -194,7 +195,8 @@
 					}
 				};
 			});
-			document.querySelectorAll('[float-bind]').forEach(function(el) {
+			var floatButtons = document.querySelectorAll('[float-bind]');
+			Array.prototype.forEach.call(floatButtons, function(el) {
 				var target = el.getAttribute('float-bind');
 				el.onkeyup = function() {
 					if (/^\d*(?:\.\d*)?$/.test(el.value)) {
@@ -207,7 +209,8 @@
 
 			if (Math.random() >= 0.5) {
 				window.vals.c = false;
-				document.querySelectorAll('.hint-text').forEach(function(el) {
+				var hints = document.querySelectorAll('.hint-text');
+				Array.prototype.forEach.call(hints, function(el) {
 					el.parentNode.removeChild(el);
 				});
 			}
