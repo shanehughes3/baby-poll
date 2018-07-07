@@ -46,12 +46,6 @@
 			position: relative;
 			width: 90%;
 			margin-left: 5%;
-			display: flex;
-			display: -webkit-box;
-			display: -moz-box;
-			display: -ms-flexbox;
-			display: -ms-flexbox;
-			justify-content: center;
 		}
 		button {
 			cursor: pointer;
@@ -66,35 +60,31 @@
 		.button-container {
 			margin-top: 1em;
 			display: flex;
-			display: -webkit-box;
-			display: -moz-box;
-			display: -ms-flexbox;
-			display: -ms-flexbox;
 			justify-content: center;
 		}
-		.queued {
+		.queued, .live, .shown {
 			position: absolute;
-			top: 13em;
+			left: 50%;
+		}
+		.queued {
 			opacity: 0;
-			transform: translate(100%, 0);
+			transform: translate(50%, 0);
 			pointer-events: none;
 		}
 		.live {
 			width: 100%;
 			max-width: 600px;
-			top: 13em;
 			text-align: center;
-			position: absolute;
 			opacity: 1;
-			transform: translate(0, 0);
+			transform: translate(-50%, 0);
 			transition: transform 0.8s ease-out, opacity 0.4s ease-out 0.4s;
+			display: block;
 			pointer-events: auto;
+			margin: 4em auto 0;
 		}
 		.shown {
-			position: absolute;
-			top: 13em;
 			opacity: 0;
-			transform: translate(-100%, 0);
+			transform: translate(-150%, 0);
 			transition: transform 0.8s ease-in, opacity 0.4s ease-in;
 			pointer-events: none;
 		}
