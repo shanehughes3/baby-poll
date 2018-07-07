@@ -11,9 +11,7 @@ exports.handler = (event, context, cb) => {
 				throw new Error(`Missing required value ${key}`);
 			}
 		});
-		const ua = (context && context.identity && context.identity.userAgent) ?
-			  context.identity.userAgent : '';
-		submitToSDB(input, ua)
+		submitToSDB(input)
 			.then(() => {
 				res.statusCode = 204;
 				res.headers = {
@@ -50,7 +48,7 @@ exports.handler = (event, context, cb) => {
 	}
 };
 
-function submitToSDB(data, userAgent) {
+function submitToSDB(data) {
 	return new Promise((resolve) => {
 		const cred = new aws.Credentials({
 			accessKeyId: process.env.KEY_ID,
@@ -77,9 +75,6 @@ function submitToSDB(data, userAgent) {
 		params.Attributes.push({
 			Name: 'submittedAt',
 			Value: new Date().toISOString()
-		}, {
-			Name: 'userAgent',
-			Value: userAgent || ''
 		});
 		sdb.putAttributes(params, (err, res) => {
 			if (err) {
