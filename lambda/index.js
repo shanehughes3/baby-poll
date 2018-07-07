@@ -20,7 +20,15 @@ exports.handler = (event, context, cb) => {
 				cb(null, res);
 			})
 			.catch((err) => {
-				throw err;
+				if (err.code === 'ConditionalCheckFailed') {
+					res.statusCode = 409;
+					res.headers = {
+						'Access-Control-Allow-Origin': '*'
+					};
+					cb(null, res);
+				} else {
+					throw err;
+				}
 			});
 	} catch (err) {
 		if (err.name === 'SyntaxError') {
@@ -28,11 +36,6 @@ exports.handler = (event, context, cb) => {
 			res.body = {
 				error: 'Non-JSON body',
 				input: event.body
-			};
-		} else if (err.name === 'ConditionalCheckFailed') {
-			res.statusCode = 400;
-			res.body = {
-				error: 'Already submitted'
 			};
 		} else {
 			console.log(err);
@@ -49,7 +52,7 @@ exports.handler = (event, context, cb) => {
 };
 
 function submitToSDB(data) {
-	return new Promise((resolve) => {
+	return new Promise((resolve, reject) => {
 		const cred = new aws.Credentials({
 			accessKeyId: process.env.KEY_ID,
 			secretAccessKey: process.env.SECRET_KEY
@@ -79,7 +82,7 @@ function submitToSDB(data) {
 		sdb.putAttributes(params, (err, res) => {
 			if (err) {
 				console.log(err);
-				throw err;
+				reject(err);
 			}
 			console.log(res);
 			resolve();

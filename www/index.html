@@ -369,10 +369,11 @@
 			xhr.send(JSON.stringify(window.vals));
 			xhr.onreadystatechange = function(a) {
 				if (xhr.readyState === XMLHttpRequest.DONE) {
-					console.log('RESPONSE', xhr.status);
 					if (xhr.status === 204) {
 						submitContainer.innerHTML = 'Got it!';
 						feedback.innerHTML = 'Thanks, we\'ll let you know what happens!';
+					} else if (xhr.status === 409) {
+						submitContainer.innertHTML = 'It looks like we\'ve already got your entry. Thanks!';
 					} else {
 						submitContainer.innerHTML = '';
 						submitContainer.appendChild(submitButton);
