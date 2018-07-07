@@ -20,10 +20,10 @@
 			line-spacing: 1.5;
 		}
 		.blue-bg {
-			background-color: #89cff088;
+			background-color: rgba(137, 207, 240, 50);
 		}
 		.pink-bg {
-			background-color: #ffb6c188;
+			background-color: rgba(255, 182, 193, 50);
 		}
 		#container {
 			position: absolute;
@@ -215,7 +215,9 @@
 				});
 			}
 			if (Math.random() >= 0.5) {
+				console.log('blue');
 				window.vals.b = 'b';
+				console.log(document.querySelector('body'));
 				document.querySelector('body').classList.add('blue-bg');
 			} else {
 				window.vals.b = 'p';
